@@ -44,7 +44,7 @@ BENCHMARK    = "aitrade"
 MAX_STEPS              = 3     # matches steps per task in definitions.py
 SUCCESS_SCORE_THRESHOLD = 0.5
 TEMPERATURE            = 0.2   # low — we want deterministic trading decisions
-MAX_TOKENS             = 10    # only one word needed: BUY / SELL / HOLD
+MAX_TOKENS             = 1024  # increased to allow models with <think> blocks to finish reasoning
 
 TASKS = [
     "trend_following",
@@ -118,13 +118,25 @@ def get_model_action(
             max_tokens=MAX_TOKENS,
             stream=False,
         )
+        import re
         text = (completion.choices[0].message.content or "").strip().upper()
 
+        # Remove `<think>...</think>` exactly, as well as `<THINK>...</THINK>`
+        # Dotall allows matching across newlines
+        text_no_think = re.sub(r'<THINK>.*?</THINK>', '', text, flags=re.DOTALL)
+        # Handle unclosed think blocks defensively (though with 1024 tokens it should close)
+        text_no_think = re.sub(r'<THINK>.*', '', text_no_think, flags=re.DOTALL)
+        
+        for action in ("BUY", "SELL", "HOLD"):
+            if action in text_no_think:
+                return action.lower()
+        
+        # Fallback if no action found in the external text, search within the raw output
         for action in ("BUY", "SELL", "HOLD"):
             if action in text:
                 return action.lower()
 
-        print(f"[DEBUG] Unexpected model output: {text!r} — defaulting to hold", flush=True)
+        print(f"[DEBUG] Unexpected model output: {text[:100]!r} ... — defaulting to hold", flush=True)
         return "hold"
 
     except Exception as exc:
