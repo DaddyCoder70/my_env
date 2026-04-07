@@ -50,3 +50,7 @@ coverage.xml
 # --- Logs ---
 *.log
 logs/
+
+# --- Episode outputs (keep folder, ignore generated files) ---
+outputs/*
+!outputs/.gitkeep
