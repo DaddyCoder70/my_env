@@ -1,0 +1,73 @@
+name: AiTrade Stock Analysis Environment
+description: >
+  An OpenEnv-compliant environment for Indian NSE equity analysis.
+  An LLM agent receives natural language market reports containing
+  technical (momentum, trend, volatility) and macro signals, and must
+  decide to BUY, SELL, or HOLD each position.
+version: "1.0.0"
+author: DaddyCoder70
+
+observation_space:
+  type: text
+  description: >
+    Natural language market analysis report covering momentum, trend,
+    volatility, macro environment, regime classification, and
+    rule-based system output.
+
+action_space:
+  type: discrete
+  actions:
+    - buy
+    - sell
+    - hold
+  description: >
+    Trading decision for the described equity position.
+
+endpoints:
+  health: /
+  reset:  /reset
+  step:   /step
+  state:  /state
+
+tasks:
+  - id: trend_following
+    description: >
+      Identify and follow a strong bullish uptrend.
+      Market regime is bull, momentum and trend scores are high.
+      Correct action: buy.
+    steps: 3
+    ideal_action: buy
+
+  - id: bear_defense
+    description: >
+      Protect capital during a clear bear market.
+      Momentum and macro scores are low, volatility is high.
+      Correct action: sell.
+    steps: 3
+    ideal_action: sell
+
+  - id: range_trading
+    description: >
+      Avoid committing capital in a sideways, directionless market.
+      Both momentum and trend are in the neutral 0.45–0.55 zone.
+      Correct action: hold.
+    steps: 3
+    ideal_action: hold
+
+  - id: macro_risk_filter
+    description: >
+      Apply the macro risk gate when macro score drops below 0.45,
+      overriding otherwise acceptable technical signals.
+      Correct action: hold.
+    steps: 3
+    ideal_action: hold
+
+scoring:
+  reward_range: [0.0, 1.0]
+  success_threshold: 0.5
+  score_formula: mean(step_rewards)
+
+constraints:
+  max_runtime_seconds: 1200
+  max_memory_gb: 8
+  max_vcpu: 2
