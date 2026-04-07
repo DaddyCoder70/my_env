@@ -18,16 +18,18 @@ def grade_action(task_id: str, action: str, signals: dict) -> float:
         else:
             return 0.1  # unrecognised action — small non-zero to avoid 0-reward crashes
 
+    raw_score = 0.5
     if task_id == "trend_following":
-        return _grade_trend_following(action, signals)
+        raw_score = _grade_trend_following(action, signals)
     elif task_id == "bear_defense":
-        return _grade_bear_defense(action, signals)
+        raw_score = _grade_bear_defense(action, signals)
     elif task_id == "range_trading":
-        return _grade_range_trading(action, signals)
+        raw_score = _grade_range_trading(action, signals)
     elif task_id == "macro_risk_filter":
-        return _grade_macro_risk(action, signals)
+        raw_score = _grade_macro_risk(action, signals)
 
-    return 0.5  # unknown task → neutral
+    # OpenEnv requirement: scores must be strictly in (0.0, 1.0)
+    return round(min(max(raw_score, 0.01), 0.99), 3)
 
 
 # ---------------------------------------------------------------------------
