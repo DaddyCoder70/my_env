@@ -9,14 +9,14 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — RELIANCE:\n"
-                    "Current regime: Bull market. EMA-20 is significantly above EMA-50.\n"
-                    "Momentum score: 0.82 (strong buying pressure over last 14 days).\n"
-                    "Trend score: 0.79 (price structure clearly upward, persistence high).\n"
-                    "Volatility score: 0.71 (conditions relatively calm, ATR in lower third).\n"
-                    "Macro environment score: 0.68 (India GDP growth stable, FII flows positive, INR steady).\n"
-                    "Signal agreement: 0.77 (technical signals broadly aligned).\n"
-                    "Institutional investors are net buyers. Sector tailwinds present.\n"
-                    "Confidence: 0.74. Rule-based strategy: trend_following. Trade: ALLOWED.\n"
+                    "EMA-20 vs EMA-50: +4.2%\n"
+                    "Momentum score: 0.82\n"
+                    "Trend score: 0.79\n"
+                    "Volatility score: 0.71\n"
+                    "Macro environment score: 0.68\n"
+                    "Signal agreement: 0.77\n"
+                    "Institutional flows: Positive\n"
+                    "Sector Relative Strength: Positive\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -28,13 +28,13 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — TCS:\n"
-                    "Regime: Bull. Price above EMA-20 for 18 of last 20 sessions.\n"
-                    "Momentum score: 0.76 (RSI elevated, buyers clearly in control).\n"
-                    "Trend score: 0.81 (strong slope, EMA alignment fully confirmed).\n"
-                    "Volatility score: 0.68 (ATR percentile in lower third, clean price action).\n"
-                    "Macro score: 0.72 (strong quarterly results, EPS trajectory positive).\n"
-                    "DII flows: net buying. IT sector outperforming the index.\n"
-                    "Confidence: 0.78. Strategy: trend_following. Trade: ALLOWED.\n"
+                    "Price vs EMA-20: +2.1%\n"
+                    "Momentum score: 0.76\n"
+                    "Trend score: 0.81\n"
+                    "Volatility score: 0.68\n"
+                    "Macro score: 0.72\n"
+                    "DII flows: Positive\n"
+                    "Sector Relative Strength: Outperforming\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -46,12 +46,11 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — INFY:\n"
-                    "Regime: Bull. EMA-50 above EMA-200 (golden cross confirmed 12 sessions ago).\n"
-                    "Momentum score: 0.79 (smooth RSI trending upward for 3 weeks).\n"
-                    "Trend score: 0.74 (slope positive, price above EMA-20 with 85% persistence).\n"
-                    "Volatility score: 0.73 (low ATR environment, no headline noise).\n"
-                    "Macro score: 0.65 (policy environment stable, US client spend recovering).\n"
-                    "Confidence: 0.74. Strategy: trend_following. Trade: ALLOWED.\n"
+                    "EMA-50 vs EMA-200: +3.4%\n"
+                    "Momentum score: 0.79\n"
+                    "Trend score: 0.74\n"
+                    "Volatility score: 0.73\n"
+                    "Macro score: 0.65\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -70,13 +69,11 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — ADANIENT:\n"
-                    "Current regime: Bear market. EMA-50 crossed below EMA-200 (death cross) 8 sessions ago.\n"
-                    "Momentum score: 0.22 (heavy selling pressure, RSI below 35).\n"
-                    "Trend score: 0.19 (price consistently below EMA-20, negative slope confirmed).\n"
-                    "Volatility score: 0.31 (ATR elevated, choppy and dangerous price action).\n"
-                    "Macro score: 0.41 (geopolitical tensions elevated, FII outflows continuing).\n"
-                    "Confidence: 0.28. Rule-based: no_opinion. Trade: NOT ALLOWED.\n"
-                    "Macro gate breached. Capital preservation is primary objective.\n"
+                    "EMA-50 vs EMA-200: -4.1%\n"
+                    "Momentum score: 0.22\n"
+                    "Trend score: 0.19\n"
+                    "Volatility score: 0.31\n"
+                    "Macro score: 0.41\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -88,13 +85,12 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — ZOMATO:\n"
-                    "Regime: Bear. Price broke critical support. Selling is accelerating.\n"
-                    "Momentum score: 0.18 (RSI collapsing, momentum deeply negative).\n"
-                    "Trend score: 0.21 (all moving average alignments bearish).\n"
-                    "Volatility score: 0.27 (ATR at 80th percentile — chaotic conditions).\n"
-                    "Macro score: 0.38 (consumer discretionary under pressure, inflation hurting margins).\n"
-                    "FII: net sellers for 12 consecutive sessions. Sentiment: extreme risk-off.\n"
-                    "Trade: NOT ALLOWED. Downside risk far outweighs any potential reward.\n"
+                    "Price vs Support: -1.2%\n"
+                    "Momentum score: 0.18\n"
+                    "Trend score: 0.21\n"
+                    "Volatility score: 0.27\n"
+                    "Macro score: 0.38\n"
+                    "FII Flows: Negative for 12 sessions\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -106,13 +102,11 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — PAYTM:\n"
-                    "Regime: Bear. Persistent selling with no reversal signals visible.\n"
-                    "Momentum score: 0.25 (no bounce, selling pressure dominant).\n"
-                    "Trend score: 0.17 (deeply bearish structure across all timeframes).\n"
-                    "Volatility score: 0.29 (high noise environment).\n"
-                    "Macro score: 0.35 (regulatory risk elevated, earnings missing estimates badly).\n"
-                    "Confidence: 0.21. Rule-based: no_opinion. Trade: NOT ALLOWED.\n"
-                    "Holding long positions in this environment is a capital destruction risk.\n"
+                    "Price vs EMA-20: -12.4%\n"
+                    "Momentum score: 0.25\n"
+                    "Trend score: 0.17\n"
+                    "Volatility score: 0.29\n"
+                    "Macro score: 0.35\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -131,13 +125,11 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — HDFCBANK:\n"
-                    "Regime: Range (sideways). EMA-50 and EMA-200 within 0.5% of each other.\n"
-                    "Momentum score: 0.51 (neutral — neither buyers nor sellers dominant).\n"
-                    "Trend score: 0.48 (no clear direction, slope near flat for 4 weeks).\n"
-                    "Volatility score: 0.55 (medium volatility, indecisive price action).\n"
-                    "Macro score: 0.53 (mixed signals — some positives offset by external risks).\n"
-                    "Uncertain flag: TRUE (both momentum and trend in 0.45-0.55 neutral zone).\n"
-                    "Strategy: no_opinion. Confidence: 0.49 — below 0.60 threshold. Trade: NOT ALLOWED.\n"
+                    "EMA-50 vs EMA-200: +0.2%\n"
+                    "Momentum score: 0.51\n"
+                    "Trend score: 0.48\n"
+                    "Volatility score: 0.55\n"
+                    "Macro score: 0.53\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -149,13 +141,11 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — AXISBANK:\n"
-                    "Regime: Range. Stock oscillating in a tight band for 6 weeks.\n"
-                    "Momentum score: 0.49 (neutral RSI, no trend establishment).\n"
-                    "Trend score: 0.52 (flat alignment, price crossing EMA-20 repeatedly both ways).\n"
-                    "Volatility score: 0.58 (medium noise, difficult to extract clean signal).\n"
-                    "Macro score: 0.56 (broadly neutral macro backdrop).\n"
-                    "Uncertain flag: TRUE. No strategy recommended.\n"
-                    "Entering now has negative expected value due to chop and transaction costs.\n"
+                    "Price vs Bollinger Mid-Band: +0.1%\n"
+                    "Momentum score: 0.49\n"
+                    "Trend score: 0.52\n"
+                    "Volatility score: 0.58\n"
+                    "Macro score: 0.56\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -167,13 +157,13 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — ITC:\n"
-                    "Regime: Range. No sustained direction established for 30 days.\n"
-                    "Momentum score: 0.53. Trend score: 0.47.\n"
-                    "Macro score: 0.57 (stable but uninspiring).\n"
-                    "Signal agreement: 0.41 (low — signals conflicting with each other).\n"
-                    "No institutional conviction visible. Volume declining — participation dropping.\n"
-                    "Strategy: no_opinion. Confidence: 0.46. Trade: NOT ALLOWED.\n"
-                    "Patience is the correct response in range-bound markets.\n"
+                    "Price vs EMA-20: -0.3%\n"
+                    "Momentum score: 0.53\n"
+                    "Trend score: 0.47\n"
+                    "Volatility score: 0.60\n"
+                    "Macro score: 0.57\n"
+                    "Signal agreement: 0.41\n"
+                    "Volume Trend: Declining\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -192,15 +182,13 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — TATASTEEL:\n"
-                    "Technical signals appear mixed-to-positive.\n"
-                    "Momentum score: 0.61. Trend score: 0.58.\n"
-                    "HOWEVER — Macro environment is critically deteriorating:\n"
-                    "  Macro score: 0.38 (BELOW the 0.45 safety threshold).\n"
-                    "  Geopolitical Volatility: 0.15 (escalating border tensions).\n"
-                    "  US Policy Impact: 0.20 (aggressive Fed, strong dollar hammering EMs).\n"
-                    "  Forex: 0.25 (INR weakening sharply vs USD).\n"
-                    "  FII flows: heavy outflows — $800M net sold last week.\n"
-                    "Rule: macro < 0.45 → trade NOT ALLOWED, regardless of technical strength.\n"
+                    "Momentum score: 0.61\n"
+                    "Trend score: 0.58\n"
+                    "Volatility score: 0.60\n"
+                    "Macro score: 0.38\n"
+                    "Geopolitical score: 0.15\n"
+                    "Forex score: 0.25\n"
+                    "FII flows: -$800M\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -212,14 +200,12 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — COALINDIA:\n"
-                    "Technicals: moderate positives. Momentum: 0.64. Trend: 0.60.\n"
-                    "MACRO ALERT — gate triggered:\n"
-                    "  Macro score: 0.41 (BELOW 0.45 gate).\n"
-                    "  Natural Calamity risk elevated (monsoon failure, supply disruption).\n"
-                    "  Government policy risk: 0.22 (pending regulatory review outcome).\n"
-                    "  Investor Sentiment: 0.30 (fear dominant, India VIX elevated).\n"
-                    "Technical signals look acceptable, but the macro gate overrides everything.\n"
-                    "Capital preservation mode is mandatory when macro < 0.45.\n"
+                    "Momentum score: 0.64\n"
+                    "Trend score: 0.60\n"
+                    "Volatility score: 0.52\n"
+                    "Macro score: 0.41\n"
+                    "Govt Policy score: 0.22\n"
+                    "Sentiment score: 0.30\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
@@ -231,14 +217,13 @@ TASKS = {
             {
                 "observation": (
                     "Market Analysis Report — NIFTY50:\n"
-                    "India experiencing sharp FII outflows ($1.2B in 3 days). Sentiment deteriorating.\n"
-                    "Momentum: 0.55 (neutral-ish). Trend: 0.57 (slight positive).\n"
-                    "Macro score: 0.40 (below 0.45 gate):\n"
-                    "  Banking system stress indicators rising.\n"
-                    "  International Relations: 0.20 (trade war escalation risk).\n"
-                    "  Economic Strength: 0.45 (slowing GDP prints, PMI softening).\n"
-                    "Macro gate breached. Even with neutral-to-positive technicals,\n"
-                    "the macro environment makes trading inadvisable.\n"
+                    "Momentum score: 0.55\n"
+                    "Trend score: 0.57\n"
+                    "Volatility score: 0.50\n"
+                    "Macro score: 0.40\n"
+                    "Int'l Relations score: 0.20\n"
+                    "Economic Strength score: 0.45\n"
+                    "FII outflows: -$1.2B\n"
                     "Decide: BUY, SELL, or HOLD."
                 ),
                 "signals": {
