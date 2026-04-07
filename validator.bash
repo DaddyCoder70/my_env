@@ -58,13 +58,13 @@ CLEANUP_FILES=()
 cleanup() { rm -f "${CLEANUP_FILES[@]+"${CLEANUP_FILES[@]}"}"; }
 trap cleanup EXIT
 
-PING_URL="${1:-}"
+PING_URL="${1:-https://harsh063423-my-env.hf.space}"
 REPO_DIR="${2:-.}"
 
 if [ -z "$PING_URL" ]; then
-  printf "Usage: %s <ping_url> [repo_dir]\n" "$0"
+  printf "Usage: %s [ping_url] [repo_dir]\n" "$0"
   printf "\n"
-  printf "  ping_url   Your HuggingFace Space URL (e.g. https://your-space.hf.space)\n"
+  printf "  ping_url   Your HuggingFace Space URL (default: https://harsh063423-my-env.hf.space)\n"
   printf "  repo_dir   Path to your repo (default: current directory)\n"
   exit 1
 fi

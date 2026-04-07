@@ -33,11 +33,12 @@ from client import AiTradeClient
 # Configuration
 # ---------------------------------------------------------------------------
 
-IMAGE_NAME = os.getenv("LOCAL_IMAGE_NAME")
-API_KEY    = os.getenv("HF_TOKEN") or os.getenv("API_KEY")
+IMAGE_NAME   = os.getenv("LOCAL_IMAGE_NAME")
+API_KEY      = os.getenv("HF_TOKEN") or os.getenv("API_KEY")
 
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 MODEL_NAME   = os.getenv("MODEL_NAME",   "Qwen/Qwen2.5-72B-Instruct")
+ENV_BASE_URL = os.getenv("ENV_BASE_URL", "http://localhost:8000")
 BENCHMARK    = "aitrade"
 
 MAX_STEPS              = 3     # matches steps per task in definitions.py
@@ -140,7 +141,7 @@ def run_task(client: OpenAI, task_name: str) -> None:
     if IMAGE_NAME:
         env_instance = AiTradeClient.from_docker_image(IMAGE_NAME, task=task_name)
     else:
-        env_instance = AiTradeClient(base_url="http://localhost:8000")
+        env_instance = AiTradeClient(base_url=ENV_BASE_URL)
 
     history: List[str] = []
     rewards: List[float] = []
