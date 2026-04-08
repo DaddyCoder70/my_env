@@ -1,6 +1,6 @@
 ---
 title: AiTrade Environment Server
-emoji: chart_with_upwards_trend
+emoji: 📈
 colorFrom: pink
 colorTo: red
 sdk: docker
