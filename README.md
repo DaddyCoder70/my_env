@@ -1,6 +1,6 @@
 ---
 title: AiTrade Environment Server
-emoji: 📈
+emoji: chart_with_upwards_trend
 colorFrom: pink
 colorTo: red
 sdk: docker
@@ -11,97 +11,96 @@ tags:
   - openenv
 ---
 
-# AiTrade OpenEnv Environment
+# AiTrade: Financial LLM Benchmark
 
-An OpenEnv-compliant trading agent environment for Indian NSE equities. Agents interact with a FastAPI + WebSocket server, receive market analysis observations, and issue `BUY`, `SELL`, or `HOLD` decisions evaluated by an LLM.
+AiTrade is an OpenEnv-compliant environment specifically designed to benchmark the financial reasoning capabilities of Large Language Models within the context of Indian NSE equities.
 
-## Tasks
+## Motivation
+Financial markets are non-linear and high-stakes. While most LLMs can perform basic sentiment analysis, they often struggle with:
+1.  **Regime Detection**: Distinguishing between bullish momentum and overextended range-bound markets.
+2.  **Risk Overrides**: Heeding macro-economic warnings (like FII outflows) even when technical signals look bullish.
+3.  **Capital Preservation**: Knowing when to sit out of directionless "chop".
 
-| Task | Description |
-|---|---|
-| `trend_following` | Bull market — reward BUY decisions |
-| `bear_defense` | Bear market — reward SELL decisions |
-| `range_trading` | Sideways market — reward HOLD decisions |
-| `macro_risk_filter` | High macro risk — reward capital-preserving actions |
+AiTrade provides a standardized interface to evaluate these core competencies.
 
-## Quick Start
+---
 
-```python
-from my_env.client import AiTradeClient
-from my_env.models import AiTradeAction
+## Environment Specification
 
-client = AiTradeClient(base_url="http://localhost:8000")
+### Observation Space
+The environment provides a structured text-based market report for each step. Each report includes:
+- **Technical Signals**: EMA deviations (20/50/200), momentum scores, and trend strength.
+- **Market Microstructure**: DII/FII institutional flows and volume trends.
+- **Macro Signals**: Geopolitical risk scores, sentiment indicators, and Forex stability.
 
-with client.sync() as env:
-    result = env.reset(task_id="trend_following")
-    print(result.observation.text)
+### Action Space
+Agents must issue one of three discrete actions:
+- `buy`: Commit capital to a long position.
+- `sell`: Exit positions or protect capital in bearish regimes.
+- `hold`: Observe from the sidelines (capital preservation).
 
-    result = env.step(AiTradeAction(action="buy"))
-    print(f"Reward: {result.reward}, Done: {result.done}")
-```
+---
 
-## Running the Server
+## Tasks and Difficulty
 
+| Task | Difficulty | Description | Core Requirement |
+| :--- | :--- | :--- | :--- |
+| `trend_following` | **Easy** | Follow strong bullish momentum. | Recognition of positive EMA/Momentum alignment. |
+| `range_trading` | **Intermediate** | Sideways market identification. | Avoiding over-trading in 0.45-0.55 neutral zones. |
+| `macro_risk_filter` | **Intermediate** | Macro risk override. | Prioritizing `hold` when macro score drops below 0.45. |
+| `bear_defense` | **Hard** | Aggressive capital protection. | Identifying bear regimes where `sell` is the only safe exit. |
+
+---
+
+## Baseline Benchmarks
+Evaluated across 3-step episodes. Scores represent Mean Reward [0.0 - 1.0].
+
+| Model | Trend Following | Bear Defense | Range Trading | Macro Risk | Result |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **GPT-OSS-120B** | 0.956 | **0.896** | 0.990 | 0.883 | **100%** |
+| **GPT-OSS-Safeguard 20B** | 0.956 | **0.896** | 0.990 | 0.883 | **100%** |
+| **Llama 4 Scout 17B** | 0.709 | 0.490 | 0.990 | 0.883 | 75% |
+| **Llama 3.3 70B** | 0.956 | 0.490 | 0.990 | 0.883 | 75% |
+| **Moonshot Kimi K2** | 0.956 | 0.490 | 0.990 | 0.883 | 75% |
+| **Llama 3.1 8B** | 0.956 | 0.490 | 0.413 | 0.603 | 50% |
+
+---
+
+## Setup and Usage
+
+### 1. Installation
+Ensure the `uv` tool is installed for dependency management.
 ```bash
-# Install dependencies
 uv sync
-
-# Start server
-uv run server
-
-# Or with hot-reload (dev)
-uvicorn my_env.server.app:app --reload --host 0.0.0.0 --port 8000
 ```
 
-## Running the Inference Agent
-
+### 2. Environment Configuration
+Configure the environment variables by copying the template.
 ```bash
-# Set environment variables
 cp .env.example .env
-# Edit .env with your API key
+```
 
-# Run all tasks
+### 3. Server Execution
+Run the local development server.
+```bash
+uv run server
+```
+
+### 4. Benchmark Evaluation
+Execute the evaluation suite against the target model.
+```bash
 python inference.py
 ```
 
-## Environment Variables
-
-```env
-API_BASE_URL=https://api.groq.com/openai/v1   # Any OpenAI-compatible endpoint
-MODEL_NAME=llama-3.3-70b-versatile            # Model identifier
-HF_TOKEN=your_api_key_here                    # API key
-LOCAL_IMAGE_NAME=                             # Optional: Docker image name
-```
-
-## Endpoints
-
-| Endpoint | Method | Description |
-|---|---|---|
-| `/reset` | POST | Reset environment for a task |
-| `/step` | POST | Execute an action |
-| `/state` | GET | Get current state |
-| `/schema` | GET | Get action/observation schemas |
-| `/ws` | WebSocket | Persistent session (low latency) |
-| `/web` | GET | Interactive web UI |
-| `/docs` | GET | OpenAPI documentation |
+---
 
 ## Project Structure
-
 ```
 my_env/
-├── __init__.py              # Module exports
-├── client.py                # AiTradeClient (WebSocket)
-├── models.py                # AiTradeAction, AiTradeObservation, AiTradeState
-├── inference.py             # LLM agent runner
-├── openenv.yaml             # OpenEnv manifest
-├── pyproject.toml           # Project metadata & dependencies
-├── .env.example             # Environment variable template
-├── Dockerfile               # Container image
-├── validator.bash           # Submission validator
-├── tasks/
-│   ├── definitions.py       # Task configs & prompts
-│   └── graders.py           # Reward calculation logic
-└── server/
-    ├── app.py               # FastAPI application
-    └── aitrade_environment.py  # Core environment logic
+├── tasks/           # Task definitions and reward graders
+├── server/          # FastAPI + WebSocket environment logic
+├── client.py        # OpenEnv client implementation
+├── models.py        # Pydantic schemas for actions/observations
+├── inference.py     # Benchmark execution script
+└── openenv.yaml     # Environment manifest
 ```
