@@ -68,6 +68,8 @@ Evaluated across 3-step episodes. Scores represent Mean Reward [0.0 - 1.0].
 | **Allam 2 7B** | 0.956 | 0.490 | 0.413 | 0.883 | 50% |
 | **Llama 3.1 8B** | 0.956 | 0.490 | 0.413 | 0.603 | 50% |
 
+<img src="assets/benchmark.png" alt="Benchmark Comparison" width="100%">
+
 ---
 
 ## Setup and Usage
