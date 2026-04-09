@@ -48,7 +48,7 @@ app = create_app(
     AiTradeAction,
     AiTradeObservation,
     env_name="aitrade",
-    max_concurrent_envs=10,  # increase this number to allow more concurrent WebSocket sessions
+    max_concurrent_envs=10,  #  concurrent WebSocket sessions
 )
 
 
