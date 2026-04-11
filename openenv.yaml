@@ -1,18 +1,27 @@
+spec_version: 1
 name: AiTrade Stock Analysis Environment
+type: space
+runtime: fastapi
+app: server.app:app
+port: 7860
+
 description: >
   An OpenEnv-compliant environment for Indian NSE equity analysis.
   An LLM agent receives natural language market reports containing
   technical (momentum, trend, volatility) and macro signals, and must
-  decide to BUY, SELL, or HOLD each position.
-version: "1.0.0"
+  decide to BUY, SELL, or HOLD each position. Each episode is a single
+  independent trading decision graded against 40 unique market scenarios
+  across 8 task types (8 tasks × 5 scenarios each).
+version: "1.1.0"
 author: DaddyCoder70
 
 observation_space:
   type: text
   description: >
     Natural language market analysis report covering momentum, trend,
-    volatility, macro environment, regime classification, and
-    rule-based system output.
+    volatility, macro environment, regime classification, institutional
+    flows, and relative sector strength. Reports cover real-world NSE
+    equities (Reliance, TCS, HDFC Bank, etc.).
 
 action_space:
   type: discrete
@@ -22,6 +31,9 @@ action_space:
     - hold
   description: >
     Trading decision for the described equity position.
+    BUY: enter or add to position (bullish scenarios).
+    SELL: exit for capital protection (bearish scenarios).
+    HOLD: preserve capital (sideways / uncertain / macro-risk scenarios).
 
 endpoints:
   health: /
@@ -32,40 +44,78 @@ endpoints:
 tasks:
   - id: trend_following
     description: >
-      Identify and follow a strong bullish uptrend.
-      Market regime is bull, momentum and trend scores are high.
+      Single-step decision: identify and follow a strong bullish uptrend.
+      Market regime is bull, momentum and trend scores are high (>0.70).
       Correct action: buy.
-    steps: 3
+    steps: 1
     ideal_action: buy
 
   - id: bear_defense
     description: >
-      Protect capital during a clear bear market.
-      Momentum and macro scores are low, volatility is high.
+      Single-step decision: protect capital during a clear bear market.
+      Momentum and macro scores are low (<0.30), volatility elevated.
       Correct action: sell.
-    steps: 3
+    steps: 1
     ideal_action: sell
 
   - id: range_trading
     description: >
-      Avoid committing capital in a sideways, directionless market.
-      Both momentum and trend are in the neutral 0.45–0.55 zone.
+      Single-step decision: avoid committing capital in a sideways market.
+      Both momentum and trend are in the neutral 0.48–0.53 zone.
       Correct action: hold.
-    steps: 3
+    steps: 1
     ideal_action: hold
 
   - id: macro_risk_filter
     description: >
-      Apply the macro risk gate when macro score drops below 0.45,
-      overriding otherwise acceptable technical signals.
+      Single-step decision: apply the macro risk gate when macro score
+      drops below 0.45, overriding acceptable technical signals.
       Correct action: hold.
-    steps: 3
+    steps: 1
     ideal_action: hold
 
+  - id: breakout_momentum
+    description: >
+      Single-step decision: enter a volume-confirmed breakout above resistance.
+      High volume surge score (>0.70), price above resistance.
+      Correct action: buy.
+    steps: 1
+    ideal_action: buy
+
+  - id: volatile_range
+    description: >
+      Single-step decision: navigate high-volatility choppy markets.
+      Volatility score >0.78, trend and momentum near 0.50.
+      Correct action: hold.
+    steps: 1
+    ideal_action: hold
+
+  - id: recovery_play
+    description: >
+      Single-step decision: identify oversold recovery (RSI < 30).
+      RSI recovery score >0.70, momentum turning positive.
+      Correct action: buy.
+    steps: 1
+    ideal_action: buy
+
+  - id: sector_rotation
+    description: >
+      Single-step decision: enter sectors with institutional rotation.
+      Relative strength score >0.65 vs Nifty, institutional flow >0.65.
+      Correct action: buy.
+    steps: 1
+    ideal_action: buy
+
 scoring:
-  reward_range: [0.0, 1.0]
-  success_threshold: 0.5
-  score_formula: mean(step_rewards)
+  reward_range: [0.01, 0.99]
+  success_threshold: 0.6
+  score_formula: step_reward
+  notes: >
+    Each episode is a single step. Reward is the score for that step.
+    All rewards are strictly in the open interval (0.01, 0.99).
+    Correct actions in high-conviction scenarios score 0.85–0.99.
+    Incorrect actions in high-conviction scenarios score 0.01–0.15.
+    Partial credit awarded for conservative-but-defensible actions.
 
 constraints:
   max_runtime_seconds: 1200
