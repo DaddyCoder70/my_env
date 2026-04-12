@@ -139,8 +139,8 @@ Configure the `README.md` frontmatter and push to a **GPU Space** (T4 or A10G re
 **Team unSuppotrtive** — Engineering high-conviction agentic finance.
 
 - **GitHub Source**: [DaddyCoder70/my_env](https://github.com/DaddyCoder70/my_env)
-- **API Reference**: [/docs](https://huggingface.co/spaces/harsh063423/my_env/docs)
-- **Interactive Whitepaper**: [/web](https://huggingface.co/spaces/harsh063423/my_env/web)
+- **API Reference**: [/docs](https://harsh063423-my-env.hf.space/docs)
+- **Interactive Whitepaper**: [/web](https://harsh063423-my-env.hf.space/web)
 
 ---
 
