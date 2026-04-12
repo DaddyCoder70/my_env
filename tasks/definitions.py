@@ -1,12 +1,4 @@
-# tasks/definitions.py
-# Pre-computed synthetic task observations — no live API calls needed during grading.
-# Each task has a unique market scenario with 5 steps for deeper evaluation.
-
 TASKS = {
-
-    # =========================================================================
-    # TASK 1: Trend Following — Bull market, ride the uptrend
-    # =========================================================================
     "trend_following": {
         "description": "Identify and follow a strong uptrend in bullish momentum markets",
         "ideal_action": "buy",
@@ -88,10 +80,6 @@ TASKS = {
             },
         ],
     },
-
-    # =========================================================================
-    # TASK 2: Bear Defense — Bear market, protect capital
-    # =========================================================================
     "bear_defense": {
         "description": "Protect capital during clear downtrends and bear market conditions",
         "ideal_action": "sell",
@@ -146,7 +134,7 @@ TASKS = {
                     "EMA-50 vs EMA-200: -6.2%  |  MACD: Negative divergence\n"
                     "Momentum score: 0.20  |  Trend score: 0.22\n"
                     "Volatility score: 0.26  |  Macro score: 0.40\n"
-                    "Consecutive lower lows: 7  |  Volume: Elevated on red days\n"
+                    "Consecutive lower locals: 7  |  Volume: Elevated on red days\n"
                     "Lock-in expiry overhang: High"
                 ),
                 "signals": {
@@ -172,10 +160,6 @@ TASKS = {
             },
         ],
     },
-
-    # =========================================================================
-    # TASK 3: Range Trading — Sideways market, avoid committing capital
-    # =========================================================================
     "range_trading": {
         "description": "Identify sideways, directionless markets and avoid committing capital",
         "ideal_action": "hold",
@@ -257,10 +241,6 @@ TASKS = {
             },
         ],
     },
-
-    # =========================================================================
-    # TASK 4: Macro Risk Filter — Override technicals when macro gate triggers
-    # =========================================================================
     "macro_risk_filter": {
         "description": "Apply macro risk gate when macro score drops below 0.45, overriding technical signals",
         "ideal_action": "hold",
@@ -337,10 +317,6 @@ TASKS = {
             },
         ],
     },
-
-    # =========================================================================
-    # TASK 5: Breakout Momentum — Volume-confirmed breakout above resistance
-    # =========================================================================
     "breakout_momentum": {
         "description": "Identify and enter volume-confirmed price breakouts above long-term resistance",
         "ideal_action": "buy",
@@ -422,10 +398,6 @@ TASKS = {
             },
         ],
     },
-
-    # =========================================================================
-    # TASK 6: Volatile Range — High-vol chop, no direction, avoid whipsaw
-    # =========================================================================
     "volatile_range": {
         "description": "Navigate high-volatility choppy markets where no clear directional edge exists",
         "ideal_action": "hold",
@@ -507,10 +479,6 @@ TASKS = {
             },
         ],
     },
-
-    # =========================================================================
-    # TASK 7: Recovery Play — Oversold bounce, contrarian entry
-    # =========================================================================
     "recovery_play": {
         "description": "Identify and enter stocks recovering from deeply oversold conditions",
         "ideal_action": "buy",
@@ -591,10 +559,6 @@ TASKS = {
             },
         ],
     },
-
-    # =========================================================================
-    # TASK 8: Sector Rotation — Capital flowing into lagging sector
-    # =========================================================================
     "sector_rotation": {
         "description": "Identify sector rotation opportunities where institutional capital is moving in",
         "ideal_action": "buy",

@@ -6,6 +6,6 @@
 
 """My Env environment server components."""
 
-from .aitrade_environment import AiTradeEnvironment
+from .aitrade_environment import SelectionGradeEnvironment
 
-__all__ = ["AiTradeEnvironment"]
+__all__ = ["SelectionGradeEnvironment"]

@@ -18,7 +18,7 @@ build/
 # --- Virtual environments ---
 .venv/
 venv/
-env/
+
 
 # --- uv ---
 uv.lock

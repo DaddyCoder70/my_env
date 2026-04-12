@@ -1,39 +1,32 @@
 spec_version: 1
-name: AiTrade Stock Analysis Environment
+name: AiTrade Selection-Grade RL Environment
 type: space
 runtime: fastapi
 app: server.app:app
 port: 7860
 
 description: >
-  An OpenEnv-compliant environment for Indian NSE equity analysis.
-  An LLM agent receives natural language market reports containing
-  technical (momentum, trend, volatility) and macro signals, and must
-  decide to BUY, SELL, or HOLD each position. Each episode is a single
-  independent trading decision graded against 40 unique market scenarios
-  across 8 task types (8 tasks × 5 scenarios each).
-version: "1.1.0"
+  A high-fidelity project for testing RL agents (SAC/PPO compatible)
+  on multi-step trading scenarios. Features continuous action spaces
+  for precise position management and a deterministic risk-adjusted 
+  grading system.
+
+version: "1.2.0"
 author: DaddyCoder70
 
 observation_space:
-  type: text
+  type: dict
   description: >
-    Natural language market analysis report covering momentum, trend,
-    volatility, macro environment, regime classification, institutional
-    flows, and relative sector strength. Reports cover real-world NSE
-    equities (Reliance, TCS, HDFC Bank, etc.).
+    Hybrid observation containing a natural language 'text' report,
+    a 'indicators' dictionary with normalized technical data (RSI, EMA, Vol),
+    and step-wise 'metadata'.
 
 action_space:
-  type: discrete
-  actions:
-    - buy
-    - sell
-    - hold
+  type: continuous
   description: >
-    Trading decision for the described equity position.
-    BUY: enter or add to position (bullish scenarios).
-    SELL: exit for capital protection (bearish scenarios).
-    HOLD: preserve capital (sideways / uncertain / macro-risk scenarios).
+    Target position weight ranging from -1.0 (100% Short) to 1.0 (100% Long).
+    0.0 represents a flat/neutral position.
+  range: [-1, 1]
 
 endpoints:
   health: /
@@ -42,82 +35,33 @@ endpoints:
   state:  /state
 
 tasks:
-  - id: trend_following
+  - id: trading_stable_v1
     description: >
-      Single-step decision: identify and follow a strong bullish uptrend.
-      Market regime is bull, momentum and trend scores are high (>0.70).
-      Correct action: buy.
-    steps: 1
-    ideal_action: buy
+      100-step episode in a low-volatility trending market.
+      Objective: Maximize capital growth via trend following.
+    steps: 100
 
-  - id: bear_defense
+  - id: trading_volatile_v1
     description: >
-      Single-step decision: protect capital during a clear bear market.
-      Momentum and macro scores are low (<0.30), volatility elevated.
-      Correct action: sell.
-    steps: 1
-    ideal_action: sell
+      100-step episode in a high-noise range-bound market.
+      Objective: Achieve high risk-adjusted (Sharpe) returns.
+    steps: 100
 
-  - id: range_trading
+  - id: trading_crash_v1
     description: >
-      Single-step decision: avoid committing capital in a sideways market.
-      Both momentum and trend are in the neutral 0.48–0.53 zone.
-      Correct action: hold.
-    steps: 1
-    ideal_action: hold
-
-  - id: macro_risk_filter
-    description: >
-      Single-step decision: apply the macro risk gate when macro score
-      drops below 0.45, overriding acceptable technical signals.
-      Correct action: hold.
-    steps: 1
-    ideal_action: hold
-
-  - id: breakout_momentum
-    description: >
-      Single-step decision: enter a volume-confirmed breakout above resistance.
-      High volume surge score (>0.70), price above resistance.
-      Correct action: buy.
-    steps: 1
-    ideal_action: buy
-
-  - id: volatile_range
-    description: >
-      Single-step decision: navigate high-volatility choppy markets.
-      Volatility score >0.78, trend and momentum near 0.50.
-      Correct action: hold.
-    steps: 1
-    ideal_action: hold
-
-  - id: recovery_play
-    description: >
-      Single-step decision: identify oversold recovery (RSI < 30).
-      RSI recovery score >0.70, momentum turning positive.
-      Correct action: buy.
-    steps: 1
-    ideal_action: buy
-
-  - id: sector_rotation
-    description: >
-      Single-step decision: enter sectors with institutional rotation.
-      Relative strength score >0.65 vs Nifty, institutional flow >0.65.
-      Correct action: buy.
-    steps: 1
-    ideal_action: buy
+      100-step episode featuring a sudden black swan price collapse.
+      Objective: Capital preservation during crash and recovery.
+    steps: 100
 
 scoring:
   reward_range: [0.01, 0.99]
-  success_threshold: 0.6
-  score_formula: step_reward
+  success_threshold: 0.75
+  score_formula: trajectory_grade
   notes: >
-    Each episode is a single step. Reward is the score for that step.
-    All rewards are strictly in the open interval (0.01, 0.99).
-    Correct actions in high-conviction scenarios score 0.85–0.99.
-    Incorrect actions in high-conviction scenarios score 0.01–0.15.
-    Partial credit awarded for conservative-but-defensible actions.
+    Evaluation is deterministic and based on the full trajectory.
+    Metrics include Total Profit, Sharpe Ratio, and Drawdown Penalties.
 
 constraints:
-  max_runtime_seconds: 1200
+  max_runtime_seconds: 1800
   max_memory_gb: 8
   max_vcpu: 2
