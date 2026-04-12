@@ -21,7 +21,6 @@ app = create_app(
 # Re-enable standard API documentation
 app.docs_url = "/docs"
 app.openapi_url = "/openapi.json"
-app.setup_openapi()
 
 @app.get("/web", response_class=HTMLResponse)
 async def terminal_ui(request: Request):
