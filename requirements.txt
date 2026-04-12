@@ -1,0 +1,12 @@
+openenv-core[core]>=0.2.2
+numpy>=1.24.0
+openai>=1.0.0
+pydantic>=2.0.0
+fastapi
+uvicorn
+python-multipart
+pandas
+matplotlib
+scikit-learn
+plotly
+yfinance
