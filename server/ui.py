@@ -112,8 +112,46 @@ def get_terminal_html():
         .footer-logo { font-family: 'DM Serif Display'; font-size: 2rem; color: var(--text); }
 
         @media (max-width: 1200px) {
-            .doc-body { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 7rem; }
+            .doc-body { grid-template-columns: 1fr; gap: 60px; }
+            .hero h1 { font-size: 4rem; }
+        }
+
+        @media (max-width: 768px) {
+            header { height: 80px; padding: 0 4%; }
+            .logo { font-size: 1.5rem; }
+            .logo span { display: none; }
+            .team-meta { display: none; }
+            .nav-links a { margin-left: 15px; font-size: 0.6rem; letter-spacing: 1px; }
+            
+            .hero { padding: 60px 4% 40px; min-height: 30vh; }
+            .hero h1 { font-size: 2.6rem; margin-bottom: 20px; }
+            .hero p { font-size: 1rem; }
+            
+            .doc-body { padding: 60px 4%; gap: 60px; }
+            .sidebar { position: relative; top: 0; margin-bottom: 40px; }
+            .sidebar h2 { font-size: 2.2rem; }
+            .sidebar p { margin-bottom: 30px; }
+            
+            section { margin-bottom: 80px; scroll-margin-top: 100px; }
+            section h3 { margin-bottom: 30px; font-size: 0.55rem; }
+            
+            .editorial-text { font-size: 1.05rem; margin-bottom: 30px; }
+            .editorial-text b { font-size: 1.3rem; }
+            
+            .technical-block { padding: 40px 20px; font-size: 0.75rem; overflow-x: auto; white-space: pre; }
+            .block-label { left: 20px; font-size: 0.5rem; letter-spacing: 3px; }
+            
+            .spec-box { padding: 30px; }
+            .spec-box h4 { font-size: 1.8rem; }
+            
+            .board-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            table { min-width: 600px; }
+            th, td { padding: 20px 15px; font-size: 0.85rem; }
+            .rank-icon { width: 30px; height: 30px; font-size: 1rem; }
+            
+            footer { padding: 60px 4%; flex-direction: column; gap: 30px; align-items: flex-start; }
+            footer div { text-align: left !important; }
+            .footer-logo { font-size: 1.6rem; }
         }
     </style>
 </head>

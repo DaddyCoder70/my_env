@@ -5,8 +5,3 @@ pydantic>=2.0.0
 fastapi
 uvicorn
 python-multipart
-pandas
-matplotlib
-scikit-learn
-plotly
-yfinance

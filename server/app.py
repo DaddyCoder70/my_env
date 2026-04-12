@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from openenv.core.env_server.http_server import create_app
 from server.aitrade_environment import SelectionGradeEnvironment
@@ -17,6 +17,11 @@ app = create_app(
     env_name="aitrade",
     max_concurrent_envs=10,
 )
+
+# Re-enable standard API documentation
+app.docs_url = "/docs"
+app.openapi_url = "/openapi.json"
+app.setup_openapi()
 
 @app.get("/web", response_class=HTMLResponse)
 async def terminal_ui(request: Request):
