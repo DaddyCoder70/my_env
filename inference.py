@@ -190,7 +190,11 @@ async def main():
         return
 
     openai_client = OpenAI(base_url=API_BASE_URL, api_key=API_KEY)
-    trading_client = TradingClient(base_url="http://localhost:8000")
+    
+    # --- DYNAMIC API RESOLUTION ---
+    # Default to production HF space but allow local override via API_GATEWAY
+    api_gateway = os.getenv("API_GATEWAY", "https://harsh063423-my-env.hf.space")
+    trading_client = TradingClient(base_url=api_gateway)
     
     for task in TASKS:
         await run_task(trading_client, openai_client, task)

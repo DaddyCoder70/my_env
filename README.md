@@ -78,7 +78,7 @@ from client import TradingClient
 
 async def run_audit():
     # Uplink to the Team unSuppotrtive infrastructure
-    async with TradingClient(base_url="https://team-unsupportive-aitrade.hf.space") as client:
+    async with TradingClient(base_url="https://harsh063423-my-env.hf.space") as client:
         # Initialize the Stable Trend regime
         obs = await client.reset(task_id="trading_stable_v1")
 
@@ -99,7 +99,7 @@ if __name__ == "__main__":
 Run a full verification cycle across multiple models:
 
 ```bash
-uv run python3 inference.py --model qwen2.5-72b --base-url https://team-unsupportive-aitrade.hf.space
+uv run python3 inference.py --model qwen2.5-72b --base-url https://harsh063423-my-env.hf.space
 ```
 
 ---
@@ -138,7 +138,7 @@ Configure the `README.md` frontmatter and push to a **GPU Space** (T4 or A10G re
 
 **Team unSuppotrtive** — Engineering high-conviction agentic finance.
 
-- **GitHub Source**: [DaddyCoder70/myenv](https://github.com/DaddyCoder70/my_env)
+- **GitHub Source**: [DaddyCoder70/my_env](https://github.com/DaddyCoder70/my_env)
 - **API Reference**: [/docs](https://huggingface.co/spaces/harsh063423/my_env/docs)
 - **Interactive Whitepaper**: [/web](https://huggingface.co/spaces/harsh063423/my_env/web)
 

@@ -124,7 +124,6 @@ def get_terminal_html():
         <div class="logo">Ai trader <span>FINAL</span> <div class="team-meta">UNSUPOTRTIVE_CORE</div></div>
         <div class="nav-links">
             <a href="https://github.com/DaddyCoder70/my_env" target="_blank">GITHUB</a>
-            <a href="https://huggingface.co/spaces/harsh063423/my_env/docs" target="_blank">DOCS</a>
             <a href="#how">PROTOCOL</a>
             <a href="#bench">BENCHMARKS</a>
         </div>
