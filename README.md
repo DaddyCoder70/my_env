@@ -2,7 +2,7 @@
 title: Ai trader — Quantitative Evaluation Engine
 emoji: 📈
 colorFrom: pink
-colorTo: black
+colorTo: red
 sdk: docker
 pinned: true
 app_port: 8000
