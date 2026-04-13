@@ -62,9 +62,9 @@ The following models have been benchmarked across the suite and ranked based on 
 
 | Rank            | Model                | Provider      | Performance Grade  |
 | :-------------- | :------------------- | :------------ | :----------------- |
-| ** Best**     | `GPT-OSS 120B`       | OSS Framework | **S-Tier** (0.92+) |
-| ** 2nd Best** | `Groq Compound Mini` | Groq          | **A-Tier** (0.88+) |
-| ** 3rd Best** | `Moonshot Kimi K2`   | Moonshot AI   | **B-Tier** (0.82+) |
+| **Best**     | `GPT-OSS 120B`       | OSS Framework | **S-Tier** (0.92+) |
+| **2nd Best** | `Groq Compound Mini` | Groq          | **A-Tier** (0.88+) |
+| **3rd Best** | `Moonshot Kimi K2`   | Moonshot AI   | **B-Tier** (0.82+) |
 
 ---
 
