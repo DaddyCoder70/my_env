@@ -24,18 +24,18 @@ An institutional-grade evaluation environment for benchmarking LLM agents agains
 
 ---
 
-## 💎 Core Innovation: Strategy Logic
+##  Core Innovation: Strategy Logic
 
 Unlike standard financial environments that reward frequent guessing, **Ai trader** implements a rigorous institutional pipeline to enforce trading discipline.
 
-### 🛡️ Noise Isolation (±0.2% EMA Buffer)
+###  Noise Isolation (±0.2% EMA Buffer)
 
 The system calculates a moving buffer around the 50-period EMA. Any price action within **±0.2%** is classified as `NEUTRAL`.
 
 - **Reasoning**: Prevents "flickering" or over-trading in sideways markets.
 - **Impact**: Significant reduction in transaction friction and slippage-induced drawdown.
 
-### 🚦 Anti-Flip Guardrail (0.5% Threshold)
+###  Anti-Flip Guardrail (0.5% Threshold)
 
 A directional flip (BUY to SELL or vice versa) is only executed if:
 
@@ -46,7 +46,7 @@ A directional flip (BUY to SELL or vice versa) is only executed if:
 
 ---
 
-## 🏛️ Strategic Scenarios
+##  Strategic Scenarios
 
 The suite includes three core "Staging Regimes" to evaluate different agent profiles:
 
@@ -56,15 +56,15 @@ The suite includes three core "Staging Regimes" to evaluate different agent prof
 | **Volatile Chop**  | `trading_volatile_v1` | High-frequency ±1.5% oscillations | Mean reversion & buffer discipline             |
 | **Systemic Crash** | `trading_crash_v1`    | Rapid -10% drawdown event         | Capital preservation & "Sell the Hole" evasion |
 
-## 🏆 Institutional Leaderboard
+##  Institutional Leaderboard
 
-The following models have been benchmarked across the `v8-Logic` suite and ranked based on their **Trend Persistence Index** and **Alpha Capture Efficiency**.
+The following models have been benchmarked across the suite and ranked based on their **Trend Persistence Index** and **Alpha Capture Efficiency**.
 
 | Rank            | Model                | Provider      | Performance Grade  |
 | :-------------- | :------------------- | :------------ | :----------------- |
-| **🥇 Best**     | `GPT-OSS 120B`       | OSS Framework | **S-Tier** (0.94+) |
-| **🥈 2nd Best** | `Groq Compound Mini` | Groq          | **A-Tier** (0.88+) |
-| **🥉 3rd Best** | `Moonshot Kimi K2`   | Moonshot AI   | **B-Tier** (0.82+) |
+| ** Best**     | `GPT-OSS 120B`       | OSS Framework | **S-Tier** (0.92+) |
+| ** 2nd Best** | `Groq Compound Mini` | Groq          | **A-Tier** (0.88+) |
+| ** 3rd Best** | `Moonshot Kimi K2`   | Moonshot AI   | **B-Tier** (0.82+) |
 
 ---
 
@@ -119,7 +119,7 @@ The environment supports the **AiTradeRubric** for fine-tuning agents. It provid
 
 ---
 
-## 🚀 Deployment
+##  Deployment
 
 ### Docker Deployment
 
@@ -134,7 +134,7 @@ Configure the `README.md` frontmatter and push to a **GPU Space** (T4 or A10G re
 
 ---
 
-## 🤝 Team & Resources
+##  Team & Resources
 
 **Team unSuppotrtive** — Engineering high-conviction agentic finance.
 
